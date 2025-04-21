@@ -73,7 +73,7 @@ const StatsScreen = () => {
 
                         {/* Chart Section */}
                         <View style={styles.chartContainer}>
-                            <Text style={styles.chartTitle}>Performance Over Time</Text>
+                            <Text style={styles.chartTitle}>Angle vs Time</Text>
                             <LineChart
                                 data={chartData}
                                 width={chartWidth}

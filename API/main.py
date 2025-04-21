@@ -20,10 +20,12 @@ def upload_video():
         return jsonify({'message': 'No file part'}), 400
         
     file = request.files['video']
-        
+    exercise = request.form.get('exercise')
+  
     if file.filename == '':
         return jsonify({'message': 'No selected file'}), 400
-        
+  
+    exercise = "Squat"
     temp_filename = None
     try:
         # Create a temporary file
@@ -33,7 +35,7 @@ def upload_video():
         temp_file.close()  # Close the file handle explicitly
         
         # Process the video
-        left, right, score = process_video(temp_filename)
+        left, right, score = process_video(temp_filename,exercise)
         
 
         os.remove(temp_filename)

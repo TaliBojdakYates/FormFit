@@ -52,7 +52,7 @@ export default function App() {
         >
           <Tab.Screen name="Upload" component={VideoUploadScreen} />
           <Tab.Screen name="Stats" component={StatsScreen} />
-          <Tab.Screen name="Profile" component={ProfileScreen} />
+
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

@@ -31,7 +31,8 @@ const VideoUploadScreen = () => {
 
     const selectItem = (item) => {
         setSelectedItem(item);
-        setIsOpen(false); // Close the dropdown after selection
+        setIsOpen(false);
+        setExercise(item);
     };
 
     // Request permissions and select video
@@ -89,9 +90,10 @@ const VideoUploadScreen = () => {
         formData.append('video', {
             uri: video,
             name: `video.${fileType}`,
-            type: `video/${fileType}`
-        });
+            type: `video/${fileType}`,
 
+        });
+        formData.append('exercise', exercise);
         try {
             const response = await fetch('http://104.194.116.241:5000/upload-video', {
                 method: 'POST',
@@ -193,16 +195,15 @@ const VideoUploadScreen = () => {
 
                                 {isOpen && (
                                     <View style={styles.dropdownList}>
-                                        <FlatList
-                                            data={data}
-                                            keyExtractor={(item) => item.value}
-                                            renderItem={({ item }) => (
-                                                <TouchableOpacity onPress={() => selectItem(item.label)} style={styles.dropdownItem}>
+                                        <ScrollView contentContainerStyle={styles.dropdownList}>
+                                            {data?.map((item, index) => (
+                                                <TouchableOpacity key={item.value || index} onPress={() => selectItem(item.label)} style={styles.dropdownItem}>
                                                     <Text style={styles.itemText}>{item.label}</Text>
                                                 </TouchableOpacity>
-                                            )}
-                                        />
+                                            ))}
+                                        </ScrollView>
                                     </View>
+
                                 )}
                             </View>
 
